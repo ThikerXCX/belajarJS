@@ -6,7 +6,7 @@ class NetworkError extends Error {
 }
 
 
-const fetchingUserFromInternet = (isOffline) => {
+const fetchingUserFromInternet = async (isOffline) => {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
 
@@ -19,13 +19,5 @@ const fetchingUserFromInternet = (isOffline) => {
 };
 
 // TODO: 2
-async function gettingUserName(){
-  try {
-    const user = await fetchingUserFromInternet(false);
-    return user.name;
-  } catch (rejectedReason) {
-   console.log(rejectedReason.message); 
-  }
-};
-
-gettingUserName();
+const a = await fetchingUserFromInternet(false)
+console.log(a);

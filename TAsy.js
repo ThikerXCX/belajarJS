@@ -6,13 +6,13 @@ class NetworkError extends Error {
 }
 
   // TODO: 1
-const fetchingUserFromInternet = (isOffline) => {
+const fetchingUserFromInternet = async (isOffline) => {
     return new Promise((resolve, reject) => {
         setTimeout(()=>{
-            if(isOffline){
-                resolve(new NetworkError('Gagal mendapatkan data dari internet'));
+            if(!isOffline){
+                resolve({ name: 'John', age: 18 });;
             }else{
-                reject({ name: 'John', age: 18 });
+                reject(new NetworkError('Gagal mendapatkan data dari internet'));
             }
         },500)
     });
@@ -20,4 +20,13 @@ const fetchingUserFromInternet = (isOffline) => {
 
   // TODO: 2
 
-await fetchingUserFromInternet(false)
+const gettingUserName = async () =>{
+    try {
+        const user = await fetchingUserFromInternet(true);
+        return user.name
+    } catch (error) {
+        return error
+    }
+}
+
+console.log(await gettingUserName());
